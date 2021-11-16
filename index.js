@@ -100,7 +100,8 @@ async function run() {
         // add order's api
         app.post('/orders', async (req, res) => {
             const order = req.body;
-            const result = await ordersCollection.insertOne(order);
+            const setStatus = { $set: { status: 'pending' } };
+            const result = await ordersCollection.insertOne(order, setStatus);
             res.json(result);
         })
 
